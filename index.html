@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lahari S — Career Diary</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #fdf0f2;
+  color: #2e1a20;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* COVER */
+.cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  background: #3d1f28;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.02) 39px, rgba(255,255,255,0.02) 40px);
+}
+.cover-badge {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #e8b4bc;
+  margin-bottom: 32px;
+  position: relative;
+}
+.cover h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 10vw, 96px);
+  font-weight: 400;
+  color: #fdf0f2;
+  line-height: 1.05;
+  position: relative;
+}
+.cover h1 em {
+  font-style: italic;
+  color: #e8b4bc;
+}
+.cover-subtitle {
+  margin-top: 24px;
+  font-size: 15px;
+  color: rgba(253,240,242,0.55);
+  letter-spacing: 1px;
+  position: relative;
+}
+.cover-meta {
+  margin-top: 48px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+}
+.cover-meta span {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: rgba(253,240,242,0.4);
+  text-transform: uppercase;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(253,240,242,0.3);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.scroll-hint::after {
+  content: '';
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(253,240,242,0.3), transparent);
+}
+
+/* LAYOUT */
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 80px 32px;
+}
+
+/* CHAPTER */
+.chapter { margin-bottom: 72px; }
+
+.chapter-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #c97b8a;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chapter-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8d0d4;
+}
+.chapter h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #2e1a20;
+}
+
+/* INTRO */
+.intro-prose {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #3d2530;
+  max-width: 640px;
+  margin-top: 32px;
+}
+.intro-prose p + p { margin-top: 16px; }
+.drop-cap::first-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5em;
+  font-weight: 700;
+  float: left;
+  line-height: 0.75;
+  margin-right: 10px;
+  margin-top: 8px;
+  color: #c97b8a;
+}
+
+/* DIVIDER */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 64px 0;
+  color: #e8d0d4;
+  font-size: 18px;
+  letter-spacing: 6px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8d0d4;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+  margin-top: 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: #e8d0d4;
+}
+.entry {
+  position: relative;
+  margin-bottom: 56px;
+}
+.entry::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fdf0f2;
+  border: 2px solid #c97b8a;
+}
+.entry-year {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c97b8a;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.entry-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #2e1a20;
+}
+.entry-org {
+  font-size: 13px;
+  color: #9a7078;
+  margin-bottom: 14px;
+  letter-spacing: 0.5px;
+}
+.entry-body {
+  font-size: 15px;
+  color: #3d2530;
+  line-height: 1.8;
+}
+.entry-body p + p { margin-top: 10px; }
+
+/* SKILLS */
+.skills-section { margin-top: 40px; }
+.skill-group {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #e8d0d4;
+}
+.skill-group:last-child { border-bottom: none; }
+.skill-group-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #c97b8a;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  font-size: 12.5px;
+  padding: 5px 13px;
+  background: #f7e4e4;
+  border: 1px solid #e8d0d4;
+  border-radius: 2px;
+  color: #2e1a20;
+  letter-spacing: 0.3px;
+}
+
+/* CERTIFICATIONS */
+.cert-list {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cert-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background: #f7e4e4;
+  border-left: 3px solid #c97b8a;
+}
+.cert-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.cert-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #2e1a20;
+}
+.cert-desc {
+  font-size: 13px;
+  color: #9a7078;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* FOOTER */
+footer {
+  background: #3d1f28;
+  color: rgba(253,240,242,0.5);
+  text-align: center;
+  padding: 48px 24px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+footer strong {
+  color: #e8b4bc;
+  font-weight: 400;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  display: block;
+  margin-bottom: 16px;
+}
+.contact {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.contact a {
+  color: rgba(253,240,242,0.4);
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .page { padding: 60px 20px; }
+  .cover-meta { gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-badge">Digital Career Diary</div>
+  <h1>Lahari <em>S.</em></h1>
+  <div class="cover-subtitle">MS Cybersecurity &middot; University of Delaware &middot; 2024&ndash;2026</div>
+  <div class="cover-meta">
+    <span>Newark, Delaware</span>
+    <span>+1 302-306-1506</span>
+    <span>Lahari.sec@gmail.com</span>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</section>
+
+<main class="page">
+
+  <!-- ABOUT -->
+  <section class="chapter">
+    <div class="chapter-label">Introduction</div>
+    <h2>About Me</h2>
+    <div class="intro-prose">
+      <p class="drop-cap">I am Sai Lahari Suragani, a cybersecurity graduate student at the University of Delaware. My interest in digital security began not in a classroom, but at home &mdash; through stories my father, a police officer, shared about people being cheated, scammed, and robbed in ways they never saw coming, all because of the internet.</p>
+      <p>Over the years, that curiosity grew into a career. I have worked with police investigators, security research firms, and built my own security tools from scratch. This diary tells that story &mdash; from the moment I first heard the word &ldquo;cybercrime&rdquo; to where I stand today.</p>
+    </div>
+  </section>
+
+  <div class="divider">&middot; &middot; &middot;</div>
+
+  <!-- TIMELINE -->
+  <section class="chapter">
+    <div class="chapter-label">Chronology</div>
+    <h2>The Journey,<br>Year by Year</h2>
+
+    <div class="timeline">
+
+      <div class="entry">
+        <div class="entry-year">2020 &mdash; The Turning Point</div>
+        <div class="entry-title">Why Cybersecurity?</div>
+        <div class="entry-org">Home, India &middot; During COVID-19 Lockdown</div>
+        <div class="entry-body">
+          <p>I had just finished my 12th board exams when the world went into lockdown. Everyone was stuck at home, and almost overnight, the internet became the only way people could work, shop, talk, and survive. But it also became a hunting ground.</p>
+          <p>My father, who worked as a police officer, started bringing home stories I could not ignore &mdash; people losing their life savings to scammers they had never met, fake websites draining bank accounts, families tricked through messages that looked completely real. These were not distant news headlines. These were real people in real trouble, and the crimes were happening faster than anyone knew how to stop them.</p>
+          <p>That was the moment I understood what cybersecurity actually meant. Not just firewalls and code &mdash; but protecting people. I decided then that this was the field I wanted to be part of.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">2020 &ndash; 2024</div>
+        <div class="entry-title">Bachelor of Engineering in Computer Science</div>
+        <div class="entry-org">Geethanjali College of Engineering &amp; Technology &middot; Hyderabad, India &middot; GPA 3.2/4.0</div>
+        <div class="entry-body">
+          <p>I joined Geethanjali College with a clear goal: learn everything I could about cybersecurity. The program had a dedicated specialization in the field, which covered everything from how to break into systems (ethically) to how encryption actually keeps data safe.</p>
+          <p>Courses like Cryptography, Digital Forensics, Ethical Hacking, Cloud Computing, Mobile Network Security, and Cyber Laws gave me a strong base. I also became Technical Head of the Cyber Warriors Club, where I organized seminars to teach students about online safety and cyber hygiene. Two of my technical poster presentations &mdash; one on cyberbullying, another on why security is non-negotiable today &mdash; each won &ldquo;Best Poster&rdquo; at their competitions.</p>
+          <p>I was also part of the National Service Scheme, volunteering in community drives like Swachh Bharat, health campaigns, and computer education for school children.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">July &ndash; August 2021</div>
+        <div class="entry-title">Cybersecurity Intern</div>
+        <div class="entry-org">Coincent.ai</div>
+        <div class="entry-body">
+          <p>My first real hands-on experience with hacking tools. I learned to use Kali Linux to crack passwords and gather information, tested web applications for common weaknesses using Burp Suite and OWASP ZAP, and studied how malware behaves and how network traffic looks when an attack is happening.</p>
+          <p>The internship walked me through the full ethical hacking process &mdash; from reconnaissance all the way to exploitation &mdash; using a cloud-based AWS lab. I practiced on intentionally vulnerable apps like DVWA and OWASP Juice Shop, finding SQL injection flaws, XSS bugs, and authentication weaknesses. It was the first time I felt like a real security professional, not just a student.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">June &ndash; July 2022</div>
+        <div class="entry-title">Cybersecurity Summer Intern</div>
+        <div class="entry-org">Gurugram Police &mdash; Cyber Crime Unit</div>
+        <div class="entry-body">
+          <p>This was the experience that connected everything for me. I worked alongside actual cybercrime investigators &mdash; the people who deal with phishing, online fraud, malware attacks, and financial scams every day. Seeing how these cases unfold in real life, and how investigators piece together what happened, made everything I had studied feel completely real.</p>
+          <p>I supported threat analysis, learned how digital forensics is done on actual evidence, and saw how indicators of compromise are identified in live investigations. This internship reminded me exactly why I chose this field: real people are affected, and the work you do genuinely matters.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">February &ndash; November 2023</div>
+        <div class="entry-title">Junior Security Researcher</div>
+        <div class="entry-org">Ironwaspinfo Security Pvt. Ltd &middot; THUB Incubation Hub, Hyderabad</div>
+        <div class="entry-body">
+          <p>My first professional role in a security firm. I focused on client-side web security &mdash; specifically Magecart attacks, where hackers secretly inject scripts into checkout pages to steal payment data. I also looked at cross-site scripting (XSS) vulnerabilities and risks from third-party scripts that companies embed on their websites without thinking twice.</p>
+          <p>Over eight months, I wrote more than 50 threat analysis reports, each explaining what was found, how serious it was, and what the client should do about it. I also helped build an internal Cybersecurity Dictionary so everyone on the team used the same language when describing threats. It was the kind of work where being precise and clear mattered as much as being technically right.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">August 2024 &ndash; Present</div>
+        <div class="entry-title">Master of Science in Cybersecurity</div>
+        <div class="entry-org">University of Delaware &middot; Newark, Delaware, USA &middot; GPA 3.74/4.0</div>
+        <div class="entry-body">
+          <p>Graduate school at UD has pushed me further than I expected. The program mixes deep theory with very practical work &mdash; from penetration testing and reverse engineering to cloud security and digital forensics at a professional level.</p>
+          <p>Courses include Penetration Testing, Reverse Engineering, Ethical Hacking, Web Application Security, Secure Software Design, System Hardening, Cloud Computing &amp; Security, and Digital Forensics. The pace is fast, the expectations are high, and I have genuinely learned something new every single week.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">September &ndash; November 2024</div>
+        <div class="entry-title">Project: Network Security Analysis Tools</div>
+        <div class="entry-org">University of Delaware</div>
+        <div class="entry-body">
+          <p>I built three custom security tools from scratch using Python, Scapy, and Go. The first was an encrypted reverse proxy that tunnels traffic securely using AES-256. The second was an ARP poisoning detector &mdash; a tool that watches your local network and alerts you if someone is trying to intercept your traffic using a man-in-the-middle attack. The third was a TCP fingerprinting tool I called &ldquo;synprobe,&rdquo; which quietly identifies what operating systems and services are running on a network without touching them.</p>
+          <p>Building these from the ground up meant understanding not just how to use security tools, but how they actually work inside.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">February &ndash; May 2025</div>
+        <div class="entry-title">Project: Ransomware Policy Design (NIST CSF 2.0)</div>
+        <div class="entry-org">University of Delaware</div>
+        <div class="entry-body">
+          <p>Healthcare organizations are among the most targeted by ransomware &mdash; and also among the least able to afford downtime. For this project, I designed a complete ransomware security policy for a healthcare organization, built around the updated NIST Cybersecurity Framework 2.0.</p>
+          <p>The policy covered all six pillars of the framework: Govern, Identify, Protect, Detect, Respond, and Recover. Every recommendation was written with the real-world constraints of a healthcare environment in mind &mdash; because a policy that is technically perfect but practically impossible to follow is useless.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-year">January &ndash; March 2026</div>
+        <div class="entry-title">Project: Threat Objective Analysis</div>
+        <div class="entry-org">University of Delaware</div>
+        <div class="entry-body">
+          <p>My most recent project focused on analyzing a real organization&rsquo;s threat landscape from the ground up. Starting from structured threat modeling, I mapped out every significant threat, scored each one by how likely it was and how much damage it could cause, and then produced a prioritized set of recommendations written for decision-makers &mdash; not just technical teams.</p>
+          <p>The goal was to translate complex threat data into clear, actionable business guidance. Security only works when the right people understand it and act on it.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider">&middot; &middot; &middot;</div>
+
+  <!-- SKILLS -->
+  <section class="chapter">
+    <div class="chapter-label">Competencies</div>
+    <h2>What I Work With</h2>
+    <div class="skills-section">
+
+      <div class="skill-group">
+        <div class="skill-group-title">Offensive Security</div>
+        <div class="skill-tags">
+          <span class="tag">Penetration Testing (VAPT)</span>
+          <span class="tag">Kali Linux</span>
+          <span class="tag">Metasploit</span>
+          <span class="tag">Burp Suite</span>
+          <span class="tag">Vulnerability Assessment</span>
+          <span class="tag">Nmap</span>
+          <span class="tag">SQLmap</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Defensive Security</div>
+        <div class="skill-tags">
+          <span class="tag">Network Security</span>
+          <span class="tag">Firewalls / VPN / IDS/IPS</span>
+          <span class="tag">Incident Response</span>
+          <span class="tag">Threat Intelligence</span>
+          <span class="tag">SOC Automation</span>
+          <span class="tag">Threat Hunting</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud &amp; DevSecOps</div>
+        <div class="skill-tags">
+          <span class="tag">AWS &middot; Azure &middot; GCP</span>
+          <span class="tag">Prisma Cloud</span>
+          <span class="tag">Cortex XDR</span>
+          <span class="tag">GitHub Advanced Security</span>
+          <span class="tag">Docker &amp; Kubernetes Scanning</span>
+          <span class="tag">SAST / DAST / SBOM</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">AI-Driven Security Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Vectra AI</span>
+          <span class="tag">SentinelOne Singularity</span>
+          <span class="tag">CrowdStrike Falcon</span>
+          <span class="tag">Darktrace</span>
+          <span class="tag">Power BI</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Programming</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Java</span>
+          <span class="tag">Go</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Compliance Frameworks</div>
+        <div class="skill-tags">
+          <span class="tag">NIST CSF 2.0</span>
+          <span class="tag">ISO 27001</span>
+          <span class="tag">GDPR</span>
+          <span class="tag">PCI-DSS</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Data Protection</div>
+        <div class="skill-tags">
+          <span class="tag">AES / RSA Cryptography</span>
+          <span class="tag">Hashing</span>
+          <span class="tag">Encryption</span>
+          <span class="tag">Data Integrity</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider">&middot; &middot; &middot;</div>
+
+  <!-- CERTIFICATIONS -->
+  <section class="chapter">
+    <div class="chapter-label">Certifications</div>
+    <h2>Validated Credentials</h2>
+    <div class="cert-list">
+
+      <div class="cert-item">
+        <div class="cert-icon">&#128737;</div>
+        <div>
+          <div class="cert-name">CompTIA Security+ (SY0-701)</div>
+          <div class="cert-desc">A globally recognized certification covering network security, threat management, cryptography, and risk identification. One of the most respected credentials in the industry.</div>
+        </div>
+      </div>
+
+      <div class="cert-item">
+        <div class="cert-icon">&#128274;</div>
+        <div>
+          <div class="cert-name">Google Cybersecurity Professional Certificate</div>
+          <div class="cert-desc">A structured program covering cybersecurity fundamentals, incident response, Python for security automation, and tools including Linux, SQL, and SIEM platforms.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Sai Lahari Suragani</strong>
+  <div class="contact">
+    <a href="tel:+13023061506">+1 302-306-1506</a>
+    <span>Lahari.sec@gmail.com</span>
+    <span>Newark, Delaware</span>
+  </div>
+</footer>
+
+</body>
+</html>
